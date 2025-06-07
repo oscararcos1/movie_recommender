@@ -25,7 +25,7 @@ def recommend(user_idx: int,
               sparse_mat: csr_matrix,
               top_n: int = 10) -> list[int]:
     # 1) Vector de similitud user–user (longitud n_users)
-    sim_scores = user_sim[user_idx]  # shape: (943,)
+    sim_scores = user_sim[user_idx]  
 
     # 2) Convertir ratings a denso para asegurar dimensiones (943×1682)
     dense_mat = sparse_mat.toarray()
@@ -39,19 +39,19 @@ def recommend(user_idx: int,
         scores = scores / denom
 
     # 5) Crear máscara de películas ya vistas
-    user_ratings = dense_mat[user_idx]  # shape: (1682,)
+    user_ratings = dense_mat[user_idx]  
     seen_mask = user_ratings > 0
     scores[seen_mask] = -1
 
     # 6) Tomar top_n índices
-    top_indices = np.argsort(scores)[::-1][:top_n]  # shape: (top_n,)
+    top_indices = np.argsort(scores)[::-1][:top_n]  
     # 7) Convertir a movie_id 1-based
     return (top_indices + 1).tolist()
 
 
 
 def main():
-    # Ruta al archivo de ratings (ajusta si usas subcarpeta ml-100k)
+    # Ruta al archivo de ratings
     DATA_PATH = 'data/u.data'
 
     # 1) Cargar datos
@@ -67,7 +67,7 @@ def main():
     top5 = recommend(user_idx=0, user_sim=user_sim, sparse_mat=sparse_mat, top_n=5)
     print(f"Top-5 recomendaciones para usuario 1: {top5}")
 
-    # 4) (Opcional) Probar otro usuario
+    # 4) Probar otro usuario
     top5_u10 = recommend(user_idx=9, user_sim=user_sim, sparse_mat=sparse_mat, top_n=5)
     print(f"Top-5 para usuario 10: {top5_u10}")
 

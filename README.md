@@ -30,7 +30,7 @@ movie_recommender/
 
 # Clona este repositorio y entra en la carpeta:
    ```bash
-   git clone <tu-repo>
+   git clone <https://github.com/oscararcos1/movie_recommender>
    cd movie_recommender
 
 Activa el entorno virtual:

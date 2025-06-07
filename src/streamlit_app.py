@@ -9,11 +9,11 @@ import umap
 import plotly.express as px
 from evaluate import avg_precision_at_k
 
-# 1) Configuración de la página (debe ir primero)
+# Configuración de la página 
 st.set_page_config(page_title="Recomendador de Películas", layout="wide")
 st.title("🎬 Recomendador de Películas")
 
-# 2) Funciones de carga y cálculo
+# Funciones de carga y cálculo
 
 @st.cache_data
 def load_data(path_ratings: str):
@@ -33,8 +33,8 @@ def load_titles(path_items: str) -> dict[int,str]:
     df = pd.read_csv(
         path_items,
         sep='|',
-        header=None,            # no hay fila de cabecera
-        usecols=[0, 1],         # sólo tomo las dos primeras columnas
+        header=None,            
+        usecols=[0, 1],        
         names=['movie_id', 'title'],
         encoding='latin-1'
     )
@@ -70,8 +70,8 @@ def recommend(user_idx: int,
     return (top_idxs + 1).tolist()
 
 # 3) Carga de datos y cálculo previo
-# Ajusta la ruta según dónde tengas u.data
-DATA_PATH = 'data/u.data'  # o 'data/u.data'
+
+DATA_PATH = 'data/u.data'  
 mat, sparse_mat = load_data(DATA_PATH)
 user_sim = compute_similarity(sparse_mat)
 
